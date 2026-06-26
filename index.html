@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>베네디토 세계관 위키</title>
+<style>
+    :root {
+        --bg-main: #0a0a0c;
+        --bg-card: #16161a;
+        --text-main: #d1d1d6;
+        --text-muted: #8e8e93;
+        --accent-gold: #c5a880;
+        --accent-red: #8b0000;
+        --border-color: #2a2a30;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #000;
+        border-bottom: 2px solid var(--accent-gold);
+        padding: 40px 20px;
+        text-align: center;
+        background-image: linear-gradient(to bottom, rgba(20,20,20,0) 0%, #000 100%);
+    }
+
+    h1 {
+        color: var(--accent-gold);
+        font-size: 2.5rem;
+        margin: 0 0 10px 0;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        letter-spacing: 5px;
+    }
+
+    /* Tabs */
+    .tab-container {
+        display: flex;
+        justify-content: center;
+        background-color: #111;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .tab-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        padding: 20px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn:hover {
+        color: #fff;
+    }
+
+    .tab-btn.active {
+        color: var(--accent-gold);
+        border-bottom: 3px solid var(--accent-gold);
+    }
+
+    /* Content Area */
+    .content-area {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.5s;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Styling */
+    h2 {
+        color: var(--accent-gold);
+        font-size: 2rem;
+        border-left: 5px solid var(--accent-red);
+        padding-left: 15px;
+        margin-top: 50px;
+    }
+
+    h3 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-top: 30px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
+    }
+
+    /* Character Grid */
+    .faction-section {
+        margin-bottom: 60px;
+        background: var(--bg-card);
+        padding: 30px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+
+    .faction-title {
+        text-align: center;
+        color: var(--accent-gold);
+        font-size: 2rem;
+        margin-bottom: 30px;
+        border-bottom: none;
+    }
+
+    .char-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .char-card {
+        background: #000;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 25px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .char-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 4px;
+        background: var(--accent-gold);
+    }
+
+    .char-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .char-role {
+        color: var(--accent-red);
+        font-weight: bold;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .char-name {
+        color: #fff;
+        font-size: 1.8rem;
+        margin: 0 0 15px 0;
+        font-weight: 900;
+    }
+    
+    .char-en {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-left: 8px;
+        font-weight: normal;
+    }
+
+    /* World Setting Text */
+    .world-box {
+        background: var(--bg-card);
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+    }
+    
+    .world-box p {
+        font-size: 1.1rem;
+    }
+</style>
+</head>
+<body>
+
+    <header>
+        <h1>BENEDITTO</h1>
+        <div class="subtitle">PROJECT WORLD WIKI</div>
+    </header>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="openTab('tab-world')">세계관</button>
+        <button class="tab-btn" onclick="openTab('tab-chars')">등장인물</button>
+    </div>
+
+    <div class="content-area">
+        <!-- 세계관 탭 -->
+        <div id="tab-world" class="tab-content active">
+            <div class="world-box">
+                <p>네온사인이 빗물에 번지는 무법의 거리. 골목마다 자욱한 담배 연기가 피어오르고, 황금빛 카지노 아래선 총성 대신 위태로운 악수가 오가는 도시국가 <strong>'베네디토'</strong>.</p>
+                <p>인간 우월주의가 법보다 우선하며, 이종족(수인, 엘프, 뱀파이어 등)은 그림자 취급을 받는 잔혹하고 매혹적인 암흑가의 세력 구도를 정리한 공식 설정 자료입니다.</p>
+            </div>
+
+            <h2>Ⅰ. 3대 패밀리 (절대 권력)</h2>
+            <div class="world-box">
+                <h3>카스텔라노 (Castellano)</h3>
+                <p>도시에서 가장 거대한 그림자. 정치권 로비와 무기 밀매를 독점하며, 이종족을 '비스티아'라는 최하위 계급으로 규정해 인간 이하로 취급하는 극단적 인간 우월주의 조직.</p>
+                
+                <h3>로제티 (Rossetti)</h3>
+                <p>상류층 유흥가와 예술 거리를 장악. 예술품 거래와 향수로 위장한 마약 유통을 담당. 종족 차별은 없으나 철저한 미(美) 지상주의를 적용해 아름답지 않은 자를 배척함.</p>
+                
+                <h3>도니 (Doni)</h3>
+                <p>사이비 종교 연계 마피아 사업. 신앙을 가장해 납치, 고문(집행), 세뇌 등 잔혹한 공포 정치를 펼치는 광신도 집단.</p>
+            </div>
+
+            <h2>Ⅱ. 4대 독자 세력 (신흥 조직)</h2>
+            <div class="world-box">
+                <h3>세르펜테 (Serpente)</h3>
+                <p>카스텔라노의 후계자가 빠져나와 세운 조직. 고급 밀주 유통과 실속 있는 청부업(암살, 납치)을 은밀히 수행하는 실리주의 소규모 정예.</p>
+
+                <h3>고토회 (Goto-Gumi)</h3>
+                <p>이레즈미 마법 각인으로 신체를 강화하고 카타나를 휘두르는 무투파. 사채업과 경호업을 담당하며 상부상조와 '인(仁)'을 목숨처럼 여김.</p>
+
+                <h3>흑룡방 (Heilong Bang)</h3>
+                <p>500년 전통의 폐쇄적인 조직. 표면은 음식점이지만 이면엔 무기, 마약, 유물 밀매와 밀입국 알선을 담당. 배신자는 가차 없이 처단함.</p>
+
+                <h3>에인 플레이크 (Ein Flake)</h3>
+                <p>차별받는 이종족이 모여 인간 중심 사회를 뒤엎기 위해 싸우는 해방 조직. 부유층 테러와 약탈을 자금 삼아 이종족에게 불법 의료와 물자를 배급함.</p>
+            </div>
+        </div>
+
+        <!-- 등장인물 탭 -->
+        <div id="tab-chars" class="tab-content">
+            
+            <div class="faction-section" style="border-top: 4px solid #fff;">
+                <h3 class="faction-title">👑 카스텔라노 패밀리</h3>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <span class="char-role">돈 카스텔라노 (Don Castellano)</span>
+                        <h4 class="char-name">스테파니아 <span class="char-en">Stefania</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">콘실리에레 (Consigliere)</span>
+                        <h4 class="char-name">발레리아 <span class="char-en">Valeria</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">카포 (Capo)</span>
+                        <h4 class="char-name">안토니오 <span class="char-en">Antonio</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faction-section" style="border-top: 4px solid #ff3366;">
+                <h3 class="faction-title">🎭 로제티 패밀리</h3>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <span class="char-role">마에스트로 (Maestro)</span>
+                        <h4 class="char-name">지오반니 <span class="char-en">Giovanni</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">뮤즈 (Muse)</span>
+                        <h4 class="char-name">카르밀라 <span class="char-en">Carmilla</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">큐레이터 (Curator)</span>
+                        <h4 class="char-name">살라자르 <span class="char-en">Salazar</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faction-section" style="border-top: 4px solid #8b0000;">
+                <h3 class="faction-title">✝️ 도니 패밀리</h3>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <span class="char-role">교주</span>
+                        <h4 class="char-name">브루노 <span class="char-en">Bruno</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">추기경</span>
+                        <h4 class="char-name">리타 <span class="char-en">Rita</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">주교</span>
+                        <h4 class="char-name">도메니코 <span class="char-en">Domenico</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faction-section" style="border-top: 4px solid #2e8b57;">
+                <h3 class="faction-title">🐍 세르펜테</h3>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <span class="char-role">보스 (Boss)</span>
+                        <h4 class="char-name">비앙카 <span class="char-en">Bianca</span></h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">카포 (Capo)</span>
+                        <h4 class="char-name">루포 <span class="char-en">Lupo</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faction-section" style="border-top: 4px solid #483d8b;">
+                <h3 class="faction-title">👹 고토회</h3>
+                <div class="char-grid">
+                    <div class="char-card">
+                        <span class="char-role">회장</span>
+                        <h4 class="char-name">고토 아케미</h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">조장</span>
+                        <h4 class="char-name">무라사메 카이</h4>
+                    </div>
+                    <div class="char-card">
+                        <span class="char-role">부조장</span>
+                        <h4 class="char-name">사메지마 레이</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
